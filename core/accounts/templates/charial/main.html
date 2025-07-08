@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ heading }}</h1>
+    <div class="button-group">
+        <a href="{% url 'charial_bill' %}" class="btn">CHARIAL BILL</a>
+        <a href="{% url 'charial_daily' %}" class="btn">CHARIAL DAILY EXPENSES</a>
+        <a href="{% url 'charial_trade' %}" class="btn">CHARIAL TRADE</a>
+        <a href="{% url 'charial_balance' %}" class="btn">CHARIAL MONTHLY BALANCE SHEET</a>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn back">Back to Dashboard</a>
+</div>
+{% endblock %}

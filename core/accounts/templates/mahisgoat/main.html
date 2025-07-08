@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ heading }}</h1>
+    <div class="button-group">
+        <a href="{% url 'mahisgoat_bill' %}" class="btn">MAHISGOAT BILL</a>
+        <a href="{% url 'mahisgoat_daily' %}" class="btn">MAHISGOAT DAILY EXPENSES</a>
+        <a href="{% url 'mahisgoat_trade' %}" class="btn">MAHISGOAT TRADE</a>
+        <a href="{% url 'mahisgoat_balance' %}" class="btn">MAHISGOAT MONTHLY BALANCE SHEET</a>
+    </div>
+    <a href="{% url 'dashboard' %}" class="btn back">Back to Dashboard</a>
+</div>
+{% endblock %}

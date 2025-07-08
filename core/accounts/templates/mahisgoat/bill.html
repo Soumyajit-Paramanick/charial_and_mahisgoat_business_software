@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ heading }}</h1>
+    <p>Current Date: {{ current_date }}</p>
+
+    <!-- Add Party Section -->
+    <div class="section">
+        <h3>Add New Party</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ party_form.partyName.label_tag }}
+                {{ party_form.partyName }}
+                {% if party_form.partyName.errors %}
+                    <div class="error-message">
+                        {{ party_form.partyName.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" name="party_submit" class="btn">Save Party</button>
+        </form>
+    </div>
+
+    <!-- Add Bill Section -->
+    <div class="section">
+        <h3>Add New Bill</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ bill_form.partyName.label_tag }}
+                {{ bill_form.partyName }}
+            </div>
+            <div class="form-group">
+                {{ bill_form.totalBill.label_tag }}
+                {{ bill_form.totalBill }}
+            </div>
+            <div class="form-group">
+                {{ bill_form.commissionPercentage.label_tag }}
+                {{ bill_form.commissionPercentage }}
+            </div>
+            <div class="form-group">
+                {{ bill_form.others.label_tag }}
+                {{ bill_form.others }}
+            </div>
+            <button type="submit" name="bill_submit" class="btn">Save Bill</button>
+        </form>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="section">
+        <h3>Filter Bills</h3>
+        <form method="get">
+            <input type="date" name="start_date" class="form-control">
+            <input type="date" name="end_date" class="form-control">
+            <button type="submit" class="btn">Filter</button>
+            <a href="{% url 'mahisgoat_bill' %}" class="btn">Clear</a>
+        </form>
+    </div>
+
+    <!-- Bills Table -->
+    <div class="section">
+        <h3>Bills Records</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Party Name</th>
+                    <th>Total Bill</th>
+                    <th>Commission %</th>
+                    <th>Commission Amount</th>
+                    <th>Others</th>
+                    <th>Net Bill</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bill in bills %}
+                <tr>
+                    <td>{{ bill.date }}</td>
+                    <td>{{ bill.partyName.partyName }}</td>
+                    <td>{{ bill.totalBill }}</td>
+                    <td>{{ bill.commissionPercentage }}</td>
+                    <td>{{ bill.commissionAmount }}</td>
+                    <td>{{ bill.others }}</td>
+                    <td>{{ bill.netBill }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">Totals</th>
+                    <th>{{ total_bill }}</th>
+                    <th></th>
+                    <th>{{ total_commission }}</th>
+                    <th>{{ total_others }}</th>
+                    <th>{{ total_net }}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <a href="{% url 'export_mahisgoat_bills' %}?{{ request.GET.urlencode }}" class="btn">Export to Excel</a>
+    </div>
+
+    <a href="{% url 'mahisgoat_main' %}" class="btn back">Back to MAHISGOAT</a>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ heading }}</h1>
+    <!-- Add your specific content here later -->
+    <a href="{% url 'mahisgoat_main' %}" class="btn back">Back to MAHISGOAT</a>
+</div>
+{% endblock %} {% endcomment %}

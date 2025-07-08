@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ heading }}</h1>
+    <p>Current Date: {{ current_date }}</p>
+
+    <!-- Add Wages Name Section -->
+    <div class="section">
+        <h3>Add New Wages Name</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ wages_form.wagesName.label_tag }}
+                {{ wages_form.wagesName }}
+                {% if wages_form.wagesName.errors %}
+                    <div class="error-message">
+                        {{ wages_form.wagesName.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" name="wages_submit" class="btn">Save Wages Name</button>
+        </form>
+    </div>
+
+    <!-- Add Other Expense Name Section -->
+    <div class="section">
+        <h3>Add Other Expense Name</h3>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ other_form.otherExpensesName.label_tag }}
+                {{ other_form.otherExpensesName }}
+                {% if other_form.otherExpensesName.errors %}
+                    <div class="error-message">
+                        {{ other_form.otherExpensesName.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" name="other_submit" class="btn">Save Expense Name</button>
+        </form>
+    </div>
+
+    <!-- Add Expense Section -->
+    <div class="section">
+        <h3>Add Daily Expense</h3>
+        <form method="post" id="expenseForm">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ expense_form.expenseType.label_tag }}
+                {{ expense_form.expenseType }}
+            </div>
+            
+            <div id="wagesNameField" class="form-group">
+                {{ expense_form.wagesName.label_tag }}
+                {{ expense_form.wagesName }}
+                {% if expense_form.wagesName.errors %}
+                    <div class="error-message">
+                        {{ expense_form.wagesName.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div id="otherExpensesNameField" class="form-group">
+                {{ expense_form.otherExpensesName.label_tag }}
+                {{ expense_form.otherExpensesName }}
+                {% if expense_form.otherExpensesName.errors %}
+                    <div class="error-message">
+                        {{ expense_form.otherExpensesName.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ expense_form.amount.label_tag }}
+                {{ expense_form.amount }}
+                {% if expense_form.amount.errors %}
+                    <div class="error-message">
+                        {{ expense_form.amount.errors }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit" name="expense_submit" class="btn">Save Expense</button>
+        </form>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="section">
+        <h3>Filter Expenses</h3>
+        <form method="get">
+            <input type="date" name="start_date" class="form-control">
+            <input type="date" name="end_date" class="form-control">
+            <select name="expense_type" class="form-control">
+                <option value="">All Types</option>
+                <option value="wages">Wages</option>
+                <option value="other">Other</option>
+            </select>
+            <button type="submit" class="btn">Filter</button>
+            <a href="{% url 'charial_daily' %}" class="btn">Clear</a>
+        </form>
+    </div>
+
+    <!-- Expenses Table -->
+    <div class="section">
+        <h3>Expenses Records</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.date }}</td>
+                    <td>{{ expense.get_expenseType_display }}</td>
+                    <td>{{ expense.get_name }}</td>
+                    <td>{{ expense.amount }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="3">Total</th>
+                    <th>{{ total_amount }}</th>
+                </tr>
+            </tfoot>
+        </table>
+        <a href="{% url 'export_charial_daily' %}?{{ request.GET.urlencode }}" class="btn">Export to Excel</a>
+    </div>
+
+    <!-- Back Button -->
+    <div style="margin-top: 20px;">
+        <a href="{% url 'charial_main' %}" class="btn">Back to CHARIAL</a>
+    </div>
+</div>
+
+<script>
+function toggleExpenseType() {
+    const expenseType = document.querySelector('[name="expenseType"]').value;
+    document.getElementById('wagesNameField').style.display = expenseType === 'wages' ? 'block' : 'none';
+    document.getElementById('otherExpensesNameField').style.display = expenseType === 'other' ? 'block' : 'none';
+    
+    // Reset fields when switching types
+    if(expenseType !== 'wages') document.querySelector('[name="wagesName"]').value = '';
+    if(expenseType !== 'other') document.querySelector('[name="otherExpensesName"]').value = '';
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    toggleExpenseType();
+    
+    // Add event listener for expense type change
+    document.querySelector('[name="expenseType"]').addEventListener('change', toggleExpenseType);
+});
+</script>
+{% endblock %}
