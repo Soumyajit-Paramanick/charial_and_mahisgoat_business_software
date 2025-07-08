@@ -32,8 +32,8 @@ A comprehensive business management solution for Charial and Mahisgoat businesse
 
 ## Demo Video
 
-[![Business Software Demo](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)  
-*(Click the image to watch the demo video)*
+The demo video is available in the [`demo/demo.mp4`](demo/demo.mp4) file.  
+*(Play it locally with your media player to see the application in action)*
 
 ---
 
@@ -49,7 +49,6 @@ A comprehensive business management solution for Charial and Mahisgoat businesse
 
 ## Installation
 
-### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Soumyajit-Paramanick/charial_and_mahisgoat_business_software.git
@@ -62,3 +61,26 @@ venv\Scripts\activate or source venv/bin/activate
 pip install -r requirements.txt
 python core/manage.py migrate
 python core/manage.py createsuperuser
+
+## Running the Application
+
+### ▶️ Windows Users
+
+Double-click the `Business_Software.bat` file to:
+
+- Activate the virtual environment  
+- Start the Django server  
+- Open the application in your browser  
+
+---
+
+### ▶️ All Platforms (Manual Start)
+
+```bash
+# Activate virtual environment
+venv\Scripts\activate  # Windows
+source venv/bin/activate  # Linux/Mac
+
+# Start the development server
+cd core
+python manage.py runserver
