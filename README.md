@@ -30,11 +30,20 @@ A comprehensive business management solution for Charial and Mahisgoat businesse
 
 ---
 
-## Demo Images
+## Screenshots  
 
-The demo video is available in the [`demo/demo.mp4`](demo/demo.mp4) file.  
-*(Play it locally with your media player to see the application in action)*
+| Demo Image 1 | Demo Image 2 | Demo Image 3 |
+|--------------|-------------|--------------|
+| ![Demo Image 1](demo/1.png) | ![Demo Image 2](demo/2.png) | ![Demo Image 3](demo/3.png) |
 
+| Demo Image 4 | Demo Image 5 | Demo Image 6 |
+|--------------|-------------|--------------|
+| ![Demo Image 4](demo/4.png) | ![Demo Image 5](demo/5.png) | ![Demo Image 6](demo/6.png) |
+
+**Demo Image 7:**  
+![Demo Image 7](demo/7.png)
+
+*(All demo images are stored inside the `demo/` folder)*
 ---
 
 ## Getting Started
