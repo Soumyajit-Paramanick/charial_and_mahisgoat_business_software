@@ -30,7 +30,7 @@ A comprehensive business management solution for Charial and Mahisgoat businesse
 
 ---
 
-## Demo Video
+## Demo Images
 
 The demo video is available in the [`demo/demo.mp4`](demo/demo.mp4) file.  
 *(Play it locally with your media player to see the application in action)*
